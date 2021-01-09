@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -242,5 +243,19 @@ public class JitsiMeetActivity extends FragmentActivity
     @Override
     public void onConferenceWillJoin(Map<String, Object> data) {
         JitsiMeetLogger.i("Conference will join: " + data);
+    }
+
+    public void onButtonClick(View view) {
+        EventManager module
+            = ReactInstanceManagerHolder.getNativeModule(
+            EventManager.class);
+
+        if (module != null) {
+            try {
+                module.sendEvent("Mute");
+            } catch (RuntimeException re) {
+                JitsiMeetLogger.e(re, "Failed to enter PiP mode");
+            }
+        }
     }
 }

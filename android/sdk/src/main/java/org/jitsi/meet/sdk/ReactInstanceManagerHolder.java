@@ -64,6 +64,7 @@ class ReactInstanceManagerHolder {
                 new AppInfoModule(reactContext),
                 new AudioModeModule(reactContext),
                 new DropboxModule(reactContext),
+                new EventManager(reactContext),
                 new ExternalAPIModule(reactContext),
                 new JavaScriptSandboxModule(reactContext),
                 new LocaleDetector(reactContext),

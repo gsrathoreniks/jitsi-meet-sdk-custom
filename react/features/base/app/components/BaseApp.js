@@ -7,6 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { compose, createStore } from 'redux';
 import Thunk from 'redux-thunk';
+import { DeviceEventEmitter } from 'react-native';
 
 import { i18next } from '../../i18n';
 import {
@@ -210,6 +211,18 @@ export default class BaseApp extends Component<*, State> {
         if (typeof APP !== 'undefined') {
             APP.store = store;
         }
+
+        var muted = true
+        DeviceEventEmitter.addListener('APIEvent', (event) => {
+            console.log("Mute Pressed!", event);  
+            console.log("Store Dispatch:", store.dispatch)
+            store.dispatch({
+                type: 'SET_AUDIO_MUTED',
+                ensureTrack: true,
+                muted
+            })
+            muted = !muted
+          });
 
         return store;
     }
