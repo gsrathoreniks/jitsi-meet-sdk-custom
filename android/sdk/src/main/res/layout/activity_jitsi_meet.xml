@@ -2,20 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".JitsiMeetActivity">
-<Button
-    android:id="@+id/button4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="161dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="162dp"
-    android:layout_marginBottom="342dp"
-    android:onClick="onButtonClick"
-    android:text="Mute"
-    />
+    <Button
+        android:id="@+id/btnMute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="Mute"
+        />
+
+    <Button
+        android:id="@+id/btnEnd"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="END CALL"
+        />
+
+    <Button
+        android:id="@+id/btnVideoMute"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="Mute Video"
+        />
+
+    <Button
+        android:id="@+id/btnStartCall"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="START CALL"
+        />
 <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"

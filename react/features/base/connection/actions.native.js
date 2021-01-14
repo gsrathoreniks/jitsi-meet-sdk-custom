@@ -314,6 +314,8 @@ function _constructOptions(state) {
  * @returns {Function}
  */
 export function disconnect() {
+    console.log('disconnected');
+
     return (dispatch: Dispatch<any>, getState: Function): Promise<void> => {
         const state = getState();
 

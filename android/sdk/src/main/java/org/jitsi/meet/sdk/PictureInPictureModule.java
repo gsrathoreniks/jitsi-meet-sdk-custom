@@ -53,7 +53,8 @@ class PictureInPictureModule extends ReactContextBaseJavaModule {
         // Android Go devices don't support PiP. There doesn't seem to be a better way to detect it than
         // to use ActivityManager.isLowRamDevice().
         // https://stackoverflow.com/questions/58340558/how-to-detect-android-go
-        isSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !am.isLowRamDevice();
+//        isSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !am.isLowRamDevice();
+        isSupported = false;
     }
 
     /**

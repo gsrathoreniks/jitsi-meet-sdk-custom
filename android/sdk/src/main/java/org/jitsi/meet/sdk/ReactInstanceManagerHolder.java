@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class ReactInstanceManagerHolder {
+public class ReactInstanceManagerHolder {
     /**
      * FIXME (from linter): Do not place Android context classes in static
      * fields (static reference to ReactInstanceManager which has field
@@ -91,6 +91,7 @@ class ReactInstanceManagerHolder {
         options.setVideoEncoderFactory(new SoftwareVideoEncoderFactory());
 
         nativeModules.add(new WebRTCModule(reactContext, options));
+        nativeModules.add(new JitsiCallbackModule(reactContext));
 
         return nativeModules;
     }
@@ -136,8 +137,8 @@ class ReactInstanceManagerHolder {
      * {@code null} if no instance for this interface is available, or if
      * {@link #reactInstanceManager} has not been initialized yet.
      */
-    static <T extends NativeModule> T getNativeModule(
-            Class<T> nativeModuleClass) {
+    public static <T extends NativeModule> T getNativeModule(
+        Class<T> nativeModuleClass) {
         ReactContext reactContext
             = reactInstanceManager != null
                 ? reactInstanceManager.getCurrentReactContext() : null;

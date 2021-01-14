@@ -27,6 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Base {@link Fragment} for applications integrating Jitsi Meet at a higher level. It
  * contains all the required wiring between the {@code JitsiMeetView} and
@@ -51,6 +53,12 @@ public class JitsiMeetFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return this.view = new JitsiMeetView(getActivity());
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+         getView().setVisibility(View.GONE);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public JitsiMeetView getJitsiView() {

@@ -14,6 +14,7 @@ import org.jitsi.meet.sdk.log.JitsiMeetLogger;
  * Module implementing an API for sending events from JavaScript to native code.
  */
 @ReactModule(name = EventManager.NAME)
+public
 class EventManager
     extends ReactContextBaseJavaModule {
 

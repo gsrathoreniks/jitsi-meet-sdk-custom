@@ -4,11 +4,12 @@ import { jitsiLocalStorage } from '@jitsi/js-utils';
 import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { I18nextProvider } from 'react-i18next';
+import { DeviceEventEmitter } from 'react-native';
 import { Provider } from 'react-redux';
 import { compose, createStore } from 'redux';
 import Thunk from 'redux-thunk';
-import { DeviceEventEmitter } from 'react-native';
 
+import { disconnect } from '../../connection';
 import { i18next } from '../../i18n';
 import {
     MiddlewareRegistry,
@@ -19,7 +20,15 @@ import {
 import { SoundCollection } from '../../sounds';
 import { appWillMount, appWillUnmount } from '../actions';
 import logger from '../logger';
+import {
+    MEDIA_TYPE,
+    SET_VIDEO_MUTED,
+    setVideoMuted,
+    VIDEO_MUTISM_AUTHORITY
+} from '../../media';
+import {NativeModules } from 'react-native';
 
+let JitsiCallbackModule = NativeModules.JitsiCallbackModule;
 declare var APP: Object;
 
 /**
@@ -45,6 +54,7 @@ type State = {
  */
 export default class BaseApp extends Component<*, State> {
     _init: Promise<*>;
+    number: VIDEO_MUTISM_AUTHORITY | number;
 
     /**
      * Initializes a new {@code BaseApp} instance.
@@ -212,17 +222,37 @@ export default class BaseApp extends Component<*, State> {
             APP.store = store;
         }
 
-        var muted = true
-        DeviceEventEmitter.addListener('APIEvent', (event) => {
-            console.log("Mute Pressed!", event);  
-            console.log("Store Dispatch:", store.dispatch)
-            store.dispatch({
-                type: 'SET_AUDIO_MUTED',
-                ensureTrack: true,
-                muted
-            })
-            muted = !muted
-          });
+        let muted = true;
+        let videomuted = true;
+
+        DeviceEventEmitter.addListener('APIEvent', event => {
+            console.log('Event name :', event.EventName);
+            if (event.EventName.includes('disconnect')) {
+                store.dispatch(disconnect());
+                JitsiCallbackModule.isCallDisconnected('true')
+            } else if (event.EventName.includes('audiomute')) {
+                console.log('muted');
+                store.dispatch({
+                    type: 'SET_AUDIO_MUTED',
+                    ensureTrack: true,
+                    muted
+                });
+                JitsiCallbackModule.isAudioMuted('true')
+                muted = !muted;
+            }else if (event.EventName.includes('mutevideo')) {
+                console.log('mute video muted');
+                store.dispatch({
+                    type: SET_VIDEO_MUTED,
+                    mediaType: 'video',
+                    authority: 4,
+                    ensureTrack: true,
+                    muted: videomuted});
+                JitsiCallbackModule.isVideoMuted(videomuted)
+                videomuted = !videomuted;
+            }
+
+        });
+
 
         return store;
     }

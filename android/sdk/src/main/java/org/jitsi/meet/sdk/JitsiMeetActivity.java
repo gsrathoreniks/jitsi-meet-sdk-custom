@@ -20,11 +20,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telecom.DisconnectCause;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.PermissionListener;
 
 import org.jitsi.meet.sdk.log.JitsiMeetLogger;
@@ -45,7 +49,6 @@ public class JitsiMeetActivity extends FragmentActivity
     private static final String JITSI_MEET_CONFERENCE_OPTIONS = "JitsiMeetConferenceOptions";
 
     // Helpers for starting the activity
-    //
 
     public static void launch(Context context, JitsiMeetConferenceOptions options) {
         Intent intent = new Intent(context, JitsiMeetActivity.class);
@@ -72,9 +75,9 @@ public class JitsiMeetActivity extends FragmentActivity
         // Listen for conference events.
         getJitsiView().setListener(this);
 
-        if (!extraInitialize()) {
-            initialize();
-        }
+//        if (!extraInitialize()) {
+//            initialize();
+//        }
     }
 
     @Override
@@ -167,7 +170,7 @@ public class JitsiMeetActivity extends FragmentActivity
         return false;
     }
 
-    protected void initialize() {
+    public void initialize() {
         // Join the room specified by the URL the app was launched with.
         // Joining without the room option displays the welcome page.
         join(getConferenceOptions(getIntent()));
@@ -229,6 +232,7 @@ public class JitsiMeetActivity extends FragmentActivity
 
     @Override
     public void onConferenceJoined(Map<String, Object> data) {
+        Toast.makeText(getApplicationContext(),"JOINED",Toast.LENGTH_SHORT).show();
         JitsiMeetLogger.i("Conference joined: " + data);
         // Launch the service for the ongoing notification.
         JitsiMeetOngoingConferenceService.launch(this);
@@ -236,26 +240,47 @@ public class JitsiMeetActivity extends FragmentActivity
 
     @Override
     public void onConferenceTerminated(Map<String, Object> data) {
+        Toast.makeText(getApplicationContext(),"DISCONNECTED",Toast.LENGTH_SHORT).show();
         JitsiMeetLogger.i("Conference terminated: " + data);
         finish();
     }
 
     @Override
     public void onConferenceWillJoin(Map<String, Object> data) {
+        Toast.makeText(getApplicationContext(),"WILL JOIN",Toast.LENGTH_SHORT).show();
         JitsiMeetLogger.i("Conference will join: " + data);
     }
 
     public void onButtonClick(View view) {
-        EventManager module
-            = ReactInstanceManagerHolder.getNativeModule(
-            EventManager.class);
 
-        if (module != null) {
-            try {
-                module.sendEvent("Mute");
-            } catch (RuntimeException re) {
-                JitsiMeetLogger.e(re, "Failed to enter PiP mode");
+        EventManager module = ReactInstanceManagerHolder.getNativeModule(EventManager.class);
+        int id = view.getId();
+        if (id == R.id.btnMute) {
+            if (module != null) {
+                try {
+                    module.sendEvent("audiomute");
+                } catch (RuntimeException re) {
+                    JitsiMeetLogger.e(re, re.getMessage());
+                }
             }
+        } else if (id == R.id.btnEnd) {
+            if (module != null) {
+                try {
+                    module.sendEvent("disconnect");
+                } catch (RuntimeException re) {
+                    JitsiMeetLogger.e(re, re.getMessage());
+                }
+            }
+        } else if (id == R.id.btnVideoMute) {
+            if (module != null) {
+                try {
+                    module.sendEvent("mutevideo");
+                } catch (RuntimeException re) {
+                    JitsiMeetLogger.e(re, re.getMessage());
+                }
+            }
+        }else if (id == R.id.btnStartCall) {
+            initialize();
         }
     }
 }

@@ -30,6 +30,7 @@ import {
     isLocalTrackMuted
 } from '../../base/tracks';
 
+let JitsiCallbackModule = NativeModules.JitsiCallbackModule;
 import CallKit from './CallKit';
 import ConnectionService from './ConnectionService';
 import { _SET_CALL_INTEGRATION_SUBSCRIPTIONS } from './actionTypes';
@@ -177,7 +178,7 @@ function _conferenceFailed({ getState }, next, action) {
  */
 function _conferenceJoined({ getState }, next, action) {
     const result = next(action);
-
+    JitsiCallbackModule.isCallStarted('true')
     if (!isCallIntegrationEnabled(getState)) {
         return result;
     }
@@ -251,6 +252,7 @@ function _conferenceLeft({ getState }, next, action) {
  * @returns {*} The value returned by {@code next(action)}.
  */
 function _conferenceWillJoin({ dispatch, getState }, next, action) {
+    console.log('CONFERENCE WILL JOIN');
     const result = next(action);
 
     if (!isCallIntegrationEnabled(getState)) {

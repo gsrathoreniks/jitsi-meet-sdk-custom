@@ -13,7 +13,7 @@ export const CAMERA_FACING_MODE = {
  *
  * @enum {string}
  */
-export const MEDIA_TYPE = {
+export let MEDIA_TYPE = {
     AUDIO: 'audio',
     PRESENTER: 'presenter',
     VIDEO: 'video'

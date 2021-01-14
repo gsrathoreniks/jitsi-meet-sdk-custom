@@ -26,6 +26,7 @@ import type { AbstractProps } from '../AbstractConference';
 
 import Labels from './Labels';
 import { default as Notice } from './Notice';
+import { DeviceEventEmitter } from 'react-native';
 
 declare var APP: Object;
 declare var interfaceConfig: Object;
