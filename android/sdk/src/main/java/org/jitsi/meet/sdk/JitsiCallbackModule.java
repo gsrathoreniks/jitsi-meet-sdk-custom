@@ -86,7 +86,7 @@ class JitsiCallbackModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void isAudioMuted(String temp) {
+    public void isAudioMuted(Boolean temp) {
         Log.d(TAG, "isAudioMuted: "+temp);
         Toast.makeText(getReactApplicationContext(),"Callback says\n\nAudio muted : "+temp,Toast.LENGTH_SHORT).show();
     }

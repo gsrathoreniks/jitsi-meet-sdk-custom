@@ -223,7 +223,7 @@ export default class BaseApp extends Component<*, State> {
         }
 
         let muted = true;
-        let videomuted = true;
+        let videomuted = false;
 
         DeviceEventEmitter.addListener('APIEvent', event => {
             console.log('Event name :', event.EventName);
@@ -237,7 +237,7 @@ export default class BaseApp extends Component<*, State> {
                     ensureTrack: true,
                     muted
                 });
-                JitsiCallbackModule.isAudioMuted('true')
+                JitsiCallbackModule.isAudioMuted(muted)
                 muted = !muted;
             }else if (event.EventName.includes('mutevideo')) {
                 console.log('mute video muted');

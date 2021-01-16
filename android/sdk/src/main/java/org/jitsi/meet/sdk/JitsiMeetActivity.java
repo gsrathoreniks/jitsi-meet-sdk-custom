@@ -69,8 +69,9 @@ public class JitsiMeetActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Toast.makeText(getApplicationContext(),"JITSI ACTIVITY CREATED",Toast.LENGTH_SHORT).show();
         setContentView(R.layout.activity_jitsi_meet);
+
 
         // Listen for conference events.
         getJitsiView().setListener(this);

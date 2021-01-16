@@ -55,7 +55,7 @@ import java.util.concurrent.Executors;
  * {@code AudioModeModule.DEFAULT} mode should be used.
  */
 @ReactModule(name = AudioModeModule.NAME)
-class AudioModeModule extends ReactContextBaseJavaModule {
+public class AudioModeModule extends ReactContextBaseJavaModule {
     public static final String NAME = "AudioMode";
 
     /**
@@ -83,7 +83,7 @@ class AudioModeModule extends ReactContextBaseJavaModule {
     private static final boolean supportsConnectionService = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     private static boolean useConnectionService_ = supportsConnectionService;
 
-    static boolean useConnectionService() {
+    public static boolean useConnectionService() {
         return supportsConnectionService && useConnectionService_;
     }
 

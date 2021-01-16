@@ -91,6 +91,7 @@ dependencies {
         implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
         implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
     }
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
 
     implementation project(':sdk')
 }

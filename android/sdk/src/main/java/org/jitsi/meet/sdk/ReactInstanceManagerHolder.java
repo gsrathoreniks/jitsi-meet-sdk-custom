@@ -159,7 +159,7 @@ public class ReactInstanceManagerHolder {
         return reactContext != null ? reactContext.getCurrentActivity() : null;
     }
 
-    static ReactInstanceManager getReactInstanceManager() {
+    public static ReactInstanceManager getReactInstanceManager() {
         return reactInstanceManager;
     }
 
@@ -191,7 +191,7 @@ public class ReactInstanceManagerHolder {
                 new com.reactnativecommunity.asyncstorage.AsyncStoragePackage(),
                 new com.reactnativecommunity.netinfo.NetInfoPackage(),
                 new com.reactnativecommunity.webview.RNCWebViewPackage(),
-                new com.rnimmersive.RNImmersivePackage(),
+//                new com.rnimmersive.RNImmersivePackage(),
                 new com.zmxv.RNSound.RNSoundPackage(),
                 new ReactPackageAdapter() {
                     @Override

@@ -43,7 +43,7 @@ public class JitsiMeetOngoingConferenceService extends Service
         static final String HANGUP = TAG + ":HANGUP";
     }
 
-    static void launch(Context context) {
+    public static void launch(Context context) {
         OngoingNotification.createOngoingConferenceNotificationChannel();
 
         Intent intent = new Intent(context, JitsiMeetOngoingConferenceService.class);
@@ -60,7 +60,7 @@ public class JitsiMeetOngoingConferenceService extends Service
         }
     }
 
-    static void abort(Context context) {
+    public static void abort(Context context) {
         Intent intent = new Intent(context, JitsiMeetOngoingConferenceService.class);
         context.stopService(intent);
     }

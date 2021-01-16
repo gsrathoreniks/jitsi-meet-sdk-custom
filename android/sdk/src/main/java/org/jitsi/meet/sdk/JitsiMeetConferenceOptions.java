@@ -303,7 +303,7 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         videoMuted = tmpVideoMuted == 0 ? null : tmpVideoMuted == 1;
     }
 
-    Bundle asProps() {
+    public Bundle asProps() {
         Bundle props = new Bundle();
 
         // Android always has the PiP flag set by default.

@@ -68,7 +68,7 @@ public class ConnectionService extends android.telecom.ConnectionService {
      * Aborts all ongoing connections. This is a last resort mechanism which forces all resources to
      * be freed on the system in case of fatal error.
      */
-    static void abortConnections() {
+    public static void abortConnections() {
         for (ConnectionImpl connection: getConnections()) {
             connection.onAbort();
         }

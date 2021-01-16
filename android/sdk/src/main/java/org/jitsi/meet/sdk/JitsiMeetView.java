@@ -157,7 +157,7 @@ public class JitsiMeetView extends BaseReactView<JitsiMeetViewListener>
      * Helper method to set the React Native props.
      * @param newProps - New props to be set on the React Native view.
      */
-    private void setProps(@NonNull Bundle newProps) {
+    public void setProps(@NonNull Bundle newProps) {
         // Merge the default options with the newly provided ones.
         Bundle props = mergeProps(JitsiMeet.getDefaultProps(), newProps);
 

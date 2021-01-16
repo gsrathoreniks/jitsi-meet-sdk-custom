@@ -24,20 +24,20 @@ import { _setImmersiveListener as _setImmersiveListenerA } from './actions';
  */
 MiddlewareRegistry.register(store => next => action => {
     switch (action.type) {
-    case _SET_IMMERSIVE_LISTENER:
-        return _setImmersiveListenerF(store, next, action);
+    // case _SET_IMMERSIVE_LISTENER:
+    //     return _setImmersiveListenerF(store, next, action);
 
     case APP_WILL_MOUNT: {
         const result = next(action);
 
-        store.dispatch(
-            _setImmersiveListenerA(_onImmersiveChange.bind(undefined, store)));
+        // store.dispatch(
+            // _setImmersiveListenerA(_onImmersiveChange.bind(undefined, store)));
 
         return result;
     }
 
     case APP_WILL_UNMOUNT:
-        store.dispatch(_setImmersiveListenerA(undefined));
+        // store.dispatch(_setImmersiveListenerA(undefined));
         break;
 
     }
@@ -53,7 +53,7 @@ StateListenerRegistry.register(
 
         return conference ? !audioOnly && !dialogOpen : false;
     },
-    /* listener */ fullScreen => _setFullScreen(fullScreen)
+    // /* listener */ fullScreen => _setFullScreen(fullScreen)
 );
 
 /**
@@ -75,7 +75,7 @@ function _onImmersiveChange({ getState }) {
         const dialogOpen = isAnyDialogOpen(state);
         const fullScreen = conference ? !audioOnly && !dialogOpen : false;
 
-        _setFullScreen(fullScreen);
+        // _setFullScreen(fullScreen);
     }
 }
 
