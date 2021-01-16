@@ -57,7 +57,7 @@ public class JitsiMeetFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-//         getView().setVisibility(View.GONE);
+         getView().setVisibility(View.GONE);
         super.onViewCreated(view, savedInstanceState);
     }
 
