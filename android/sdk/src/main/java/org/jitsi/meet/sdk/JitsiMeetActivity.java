@@ -76,9 +76,9 @@ public class JitsiMeetActivity extends FragmentActivity
         // Listen for conference events.
         getJitsiView().setListener(this);
 
-//        if (!extraInitialize()) {
-//            initialize();
-//        }
+        if (!extraInitialize()) {
+            initialize();
+        }
     }
 
     @Override

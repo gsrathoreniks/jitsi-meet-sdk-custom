@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.modules.core.PermissionListener;
 import org.jitsi.meet.sdk.AudioModeModule;
+import org.jitsi.meet.sdk.BaseReactView;
 import org.jitsi.meet.sdk.ConnectionService;
 import org.jitsi.meet.sdk.EventManager;
 import org.jitsi.meet.sdk.JitsiMeet;
